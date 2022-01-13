@@ -1,24 +1,11 @@
-# todolist-vuejs
+## Todo List VueJS 3
 
-## Project setup
-```
-yarn install
-```
+- CRUD
+- Search
+- Dark Mode
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+![](foto.png)
 
-### Compiles and minifies for production
-```
-yarn build
-```
+`yarn // install dependencies`
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`yarn serve // start project`
