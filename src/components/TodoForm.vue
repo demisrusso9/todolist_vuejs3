@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 	import { todo, search, edit, list } from '@/store/todo'
 	import { toggleDarkMode } from '@/store/darkTheme'
-	import Button from '../ui/Button/Button.vue'
-	import ButtonIcon from '../ui/Button/ButtonIcon.vue'
-	import Input from '../ui/Input/Input.vue'
+	import Button from './ui/Button.vue'
+	import ButtonIcon from './ui/ButtonIcon.vue'
+	import Input from './ui/Input.vue'
 	import { TypeTodos } from '@/types/typeTodos'
-	import Icon from '../ui/Icon/Icon.vue'
+	import Icon from './ui/Icon.vue'
 	import ContrastIcon from '@/assets/icons/contrast.svg'
 
 	function addTodo(text: string) {

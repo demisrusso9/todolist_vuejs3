@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 	import { search, list } from '@/store/todo'
-	import TodoItem from '../FormItem/TodoItem.vue'
+	import TodoItem from './TodoItem.vue'
 
 	function searchTodo(text: string) {
 		const value = text.toLowerCase()
