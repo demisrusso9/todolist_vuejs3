@@ -1,25 +1,21 @@
 <script lang="ts" setup>
-	import { ref, defineEmits, defineProps } from 'vue'
-	import router from '@/router'
-	import { auth, provider } from '@/store/authentication'
-	import { signInWithPopup } from 'firebase/auth'
-	import { isAuthenticated } from '@/store/authentication'
+	import { ref } from 'vue'
+	import { signWithGoogle, signup } from '@/store/auth'
 
 	const username = ref('')
 	const password = ref('')
 	const alreadyMember = ref(false)
+	const loading = ref(false)
 
-	function signWithGoogle() {
-		signInWithPopup(auth, provider).then((result) => {
-			console.log(result)
-
-			localStorage.setItem('auth', 'true')
-			isAuthenticated.value = true
-			router.push('/notes')
-		})
+	async function handleForm() {
+		loading.value = true
+		try {
+			await signup(username.value, password.value)
+		} catch {
+			console.log('Error')
+		}
+		loading.value = false
 	}
-
-	function handleForm() {}
 </script>
 
 <template>
@@ -33,18 +29,28 @@
 
 			<section>
 				<div class="box">
-					<input placeholder="username" type="text" v-model="username" />
+					<input
+						disabled
+						placeholder="future build"
+						type="text"
+						v-model="username"
+					/>
 				</div>
 
 				<div class="box">
-					<input placeholder="password" type="password" v-model="password" />
+					<input
+						disabled
+						placeholder="future build"
+						type="password"
+						v-model="password"
+					/>
 				</div>
 
-				<button type="submit">
+				<!-- <button type="submit">
 					{{ alreadyMember ? 'Login' : 'Register' }}
-				</button>
+				</button> -->
 
-				<button class="google" @click="signWithGoogle">
+				<button :disabled="loading" class="google" @click="signWithGoogle">
 					Sign in with Google
 				</button>
 			</section>

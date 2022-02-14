@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-	import Authentication from '@/components/Authentication.vue'
+	import AuthenticationForm from '@/components/AuthenticationForm.vue'
 </script>
 
 <template>
-	<div>
-		<Authentication />
-	</div>
+	<AuthenticationForm />
 </template>
