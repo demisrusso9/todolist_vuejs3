@@ -1,11 +1,24 @@
 ## Todo List VueJS 3
 
-- CRUD
-- Search
-- Dark Mode
+I'm implementing Router and Firebase on this project.
 
-![](foto.png)
+- [x] Firebase Authentication
+- [ ] Firebase CRUD
+- [ ] Search
+- [ ] Dark Mode
 
-`yarn // install dependencies`
+---
 
-`yarn serve // start project`
+#### Routes
+
+- Dashboard
+- Create Notes
+- List Notes
+
+---
+
+### Setup project
+
+`yarn` to install dependencies.
+
+`yarn serve` to start project.

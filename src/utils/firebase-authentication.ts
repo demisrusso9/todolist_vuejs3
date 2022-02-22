@@ -1,5 +1,5 @@
 import { ref, watchEffect } from 'vue'
-import { auth, provider } from '@/store/firebase'
+import { auth, provider } from '@/utils/firebase-config'
 import {
 	createUserWithEmailAndPassword,
 	signInWithPopup,
@@ -16,7 +16,9 @@ function signup(email: string, password: string) {
 function signWithGoogle() {
 	signInWithPopup(auth, provider).then((result) => {
 		user.value = result
-		router.push('/notes')
+		console.log('signWithGoogle function')
+
+		router.push('/dashboard')
 	})
 }
 
@@ -28,14 +30,12 @@ const signUserOut = () => {
 }
 
 /// Is There an user logged in ?
-watchEffect(() => {
-	const unsubscribe = auth.onAuthStateChanged((userState) => {
-		if (userState) {
-			user.value = userState
-			router.push('/notes')
-		}
-	})
-	return unsubscribe
-})
-
+// watchEffect(() => {
+// 	auth.onAuthStateChanged((userState) => {
+// 		if (userState) {
+// 			user.value = userState
+// 			router.push('/dashboard')
+// 		}
+// 	})
+// })
 export { signup, signWithGoogle, signUserOut, user }

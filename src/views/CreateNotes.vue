@@ -1,0 +1,122 @@
+<script lang="ts" setup>
+	import { note, search } from '@/store/notes'
+	import { toggleDarkMode } from '@/store/darkTheme'
+	import Button from '@/components/ui/Button.vue'
+	import ButtonIcon from '@/components/ui/ButtonIcon.vue'
+	import Input from '@/components/ui/Input.vue'
+	import { NotesProps } from '@/types/notes'
+	import Icon from '@/components/ui/Icon.vue'
+	import ContrastIcon from '@/assets/icons/contrast.svg'
+	import Textarea from '@/components/ui/Textarea.vue'
+	import { createNote, updateNote } from '@/utils/firebase-document'
+	import { computed, watch } from 'vue'
+	import router from '@/router'
+	import { useRoute } from 'vue-router'
+
+	const maxlength = computed(() => 400 - note.description.length)
+
+	const route = useRoute()
+	const parameterId = computed(() => route.params.id || null)
+
+	function handleForm() {
+		// Fields empty ? return
+		if (!note.title || !note.description) return
+
+		// Parameter equal null? Create Note
+		if (parameterId.value === null) return createNote()
+		// Has a parameter ? Edit Note
+		else updateNote(parameterId.value as string)
+
+		// Clear fields
+		note.title = ''
+		note.description = ''
+	}
+
+	function cancelEdit() {
+		router.push('/notes')
+	}
+</script>
+
+<template>
+	<form @submit.prevent="handleForm">
+		<fieldset>
+			<legend>
+				{{ !parameterId ? 'Describe your note' : 'Edit your note' }}
+			</legend>
+
+			<Input v-model:title="note.title" placeholder="Type your todo here" />
+			<small>{{ maxlength }}</small>
+			<Textarea v-model:description="note.description" />
+
+			<div>
+				<Button
+					type="submit"
+					:msg="!parameterId ? 'Add' : 'Edit'"
+					:class="parameterId && 'edit'"
+					:disabled="false"
+				/>
+				<Button
+					v-show="parameterId"
+					type="button"
+					msg="Cancel"
+					:class="parameterId && 'cancel'"
+					:disabled="false"
+					@click="cancelEdit"
+				/>
+			</div>
+		</fieldset>
+	</form>
+</template>
+
+<style lang="scss" scoped>
+	form {
+		height: 100%;
+		display: flex;
+		flex-grow: 1;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 2rem;
+
+		fieldset {
+			border: 1px solid hsl(200, 0%, 75%);
+			border-radius: 15px;
+			display: inherit;
+			flex-direction: column;
+			flex-grow: 1;
+			width: 100%;
+			height: 100%;
+			max-width: 500px;
+			padding: 3rem;
+
+			legend {
+				border-radius: 30px;
+				padding: 1rem;
+				text-align: center;
+				background-color: hsl(200, 100%, 50%);
+			}
+
+			small {
+				margin-left: 1rem;
+			}
+
+			div {
+				display: flex;
+
+				button + button {
+					margin-left: 1rem;
+				}
+			}
+		}
+	}
+
+	@media screen and (max-width: 350px) {
+		form {
+			margin: 1rem;
+
+			fieldset {
+				padding: 1rem;
+			}
+		}
+	}
+</style>

@@ -1,6 +1,9 @@
 <script lang="ts" setup>
-	import { ref } from 'vue'
-	import { signWithGoogle, signup } from '@/store/auth'
+	import { onBeforeMount, ref, watchEffect } from 'vue'
+	import { signWithGoogle, signup, user } from '@/utils/firebase-authentication'
+	import router from '@/router'
+	import { auth } from '@/utils/firebase-config'
+	// import {} from '@/utils/firebase-document'
 
 	const username = ref('')
 	const password = ref('')
@@ -67,7 +70,9 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		align-items: center;
 		text-align: center;
+		height: 100%;
 
 		h1 {
 			font-size: 3rem;

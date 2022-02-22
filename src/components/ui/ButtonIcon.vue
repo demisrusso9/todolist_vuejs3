@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 	import { defineProps } from 'vue'
-	import { edit } from '@/store/todo'
+	import { edit } from '@/store/notes'
 </script>
 
 <template>

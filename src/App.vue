@@ -5,13 +5,5 @@
 <template>
 	<Header />
 
-	<main class="main">
-		<router-view />
-	</main>
+	<router-view />
 </template>
-
-<style scoped lang="scss">
-	.main {
-		min-height: 100vh;
-	}
-</style>
