@@ -1,17 +1,12 @@
 <script lang="ts" setup>
-	import { clearFields, note, search } from '@/store/notes'
-	import { toggleDarkMode } from '@/store/darkTheme'
+	import { computed } from 'vue'
+	import { useRoute } from 'vue-router'
+	import router from '@/router'
 	import Button from '@/components/ui/Button.vue'
-	import ButtonIcon from '@/components/ui/ButtonIcon.vue'
 	import Input from '@/components/ui/Input.vue'
-	import { NotesProps } from '@/types/notes'
-	import Icon from '@/components/ui/Icon.vue'
-	import ContrastIcon from '@/assets/icons/contrast.svg'
 	import Textarea from '@/components/ui/Textarea.vue'
 	import { createNote, updateNote } from '@/utils/firebase-document'
-	import { computed, watch } from 'vue'
-	import router from '@/router'
-	import { useRoute } from 'vue-router'
+	import { clearFields, note } from '@/store/notes'
 
 	const maxlength = computed(() => 400 - note.description.length)
 

@@ -36,4 +36,5 @@ watchEffect(() => {
 		}
 	})
 })
+
 export { signup, signWithGoogle, signUserOut, user }

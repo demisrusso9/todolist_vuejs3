@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-	import { onBeforeMount, ref, watchEffect } from 'vue'
-	import { signWithGoogle, signup, user } from '@/utils/firebase-authentication'
-	import router from '@/router'
-	import { auth } from '@/utils/firebase-config'
-	// import {} from '@/utils/firebase-document'
+	import { ref } from 'vue'
+	import { signWithGoogle, signup } from '@/utils/firebase-authentication'
 
 	const username = ref('')
 	const password = ref('')
@@ -48,10 +45,6 @@
 						v-model="password"
 					/>
 				</div>
-
-				<!-- <button type="submit">
-					{{ alreadyMember ? 'Login' : 'Register' }}
-				</button> -->
 
 				<button :disabled="loading" class="google" @click="signWithGoogle">
 					Sign in with Google

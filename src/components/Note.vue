@@ -1,15 +1,12 @@
 <script lang="ts" setup>
 	import { defineProps, ref } from 'vue'
-
-	import { NotesProps } from '@/types/notes'
-	import Button from './ui/Button.vue'
-
+	import Button from '@/components/ui/Button.vue'
 	import FavoriteIcon from '@/assets/icons/favorite.svg'
 	import EditIcon from '@/assets/icons/edit.svg'
 	import RemoveIcon from '@/assets/icons/remove.svg'
+	import { NotesProps } from '@/types/notes'
 	import {
 		markAsFavorite,
-		updateNote,
 		openEditNote,
 		deleteNote
 	} from '@/utils/firebase-document'

@@ -7,15 +7,8 @@ import {
 	doc
 } from 'firebase/firestore'
 import { db } from './firebase-config'
-import { reactive } from 'vue'
 import router from '@/router'
-import { note } from '@/store/notes'
-import { NotesProps } from '@/types/notes'
-import { darkTheme } from '@/store/darkTheme'
-
-const state = reactive({
-	notes: [] as NotesProps[]
-})
+import { note, state } from '@/store/notes'
 
 const collectionRef = collection(db, 'notes')
 
@@ -35,14 +28,6 @@ async function createNote() {
 	await addDoc(collectionRef, {
 		title: note.title,
 		description: note.description,
-		favorite: false
-	})
-}
-
-async function createNoteTest() {
-	await addDoc(collectionRef, {
-		title: 'title',
-		description: 'description',
 		favorite: false
 	})
 }
@@ -86,12 +71,4 @@ async function deleteNote(id: string) {
 	await deleteDoc(docRef)
 }
 
-export {
-	createNote,
-	createNoteTest,
-	deleteNote,
-	openEditNote,
-	updateNote,
-	markAsFavorite,
-	state
-}
+export { createNote, deleteNote, openEditNote, updateNote, markAsFavorite }

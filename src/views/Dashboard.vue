@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-	import { state } from '@/utils/firebase-document'
+	import { state } from '@/store/notes'
 </script>
 
 <template>
 	<div class="grid">
-		<!-- <p>route param: {{ $route.params.id }}</p> -->
 		<section class="create">
 			<router-link to="/manage">
 				<p>Create</p>

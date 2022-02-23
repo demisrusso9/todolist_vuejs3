@@ -1,13 +1,10 @@
 <script lang="ts" setup>
-	import { state, createNoteTest } from '@/utils/firebase-document'
-	import { search } from '@/store/notes'
 	import Note from '@/components/Note.vue'
-	import { watch } from 'vue'
+	import { state } from '@/store/notes'
 </script>
 
 <template>
 	<section>
-		<button @click="createNoteTest">CREATE</button>
 		<Note v-for="note in state.notes" :key="note.id" :note="note" />
 	</section>
 </template>

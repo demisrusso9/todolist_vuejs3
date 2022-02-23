@@ -1,13 +1,10 @@
-import { user } from '@/utils/firebase-authentication'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import SignUp from '@/views/SignUp.vue'
 import CreateNotes from '@/views/CreateNotes.vue'
 import DisplayNotes from '@/views/DisplayNotes.vue'
 import Dashboard from '@/views/Dashboard.vue'
-import { watchEffect, onBeforeMount, onMounted } from 'vue'
-import { auth } from '@/utils/firebase-config'
-import { clearFields, note } from '@/store/notes'
-// import { getNotes } from '@/utils/firebase-document'
+import { clearFields } from '@/store/notes'
+import { user } from '@/utils/firebase-authentication'
 
 const routes: Array<RouteRecordRaw> = [
 	{

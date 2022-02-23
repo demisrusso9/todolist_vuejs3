@@ -1,10 +1,7 @@
-<script lang="ts" setup>
-	import { defineProps } from 'vue'
-	import { edit } from '@/store/notes'
-</script>
+<script lang="ts" setup></script>
 
 <template>
-	<button :disabled="edit.isActive">
+	<button>
 		<slot />
 	</button>
 </template>
