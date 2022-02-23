@@ -18,15 +18,18 @@
 		if (!note.title || !note.description) return
 
 		// Parameter equal null? Create Note
-		if (parameterId.value === null) return createNote()
+		if (parameterId.value === null) {
+			createNote()
+			router.push('/notes')
+			return
+		}
 		// Has a parameter ? Edit Note
 		else updateNote(parameterId.value as string)
 
-		clearFields()
+		router.push('/notes')
 	}
 
 	function cancelEdit() {
-		clearFields()
 		router.push('/notes')
 	}
 </script>

@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 	import { state } from '@/store/notes'
+	import { openEditNote } from '@/utils/firebase-document'
+
+	function seeFavoriteNotes() {
+		return state.notes.filter((note) => note.favorite)
+	}
 </script>
 
 <template>
@@ -27,9 +32,18 @@
 		</section>
 
 		<section class="favorite">
-			<a href="#">
-				<p>Favorite Notes</p>
-			</a>
+			<p v-show="seeFavoriteNotes().length">Favorite Notes</p>
+
+			<small v-show="seeFavoriteNotes().length === 0"
+				>Nothing to show here</small
+			>
+			<div
+				v-for="note in seeFavoriteNotes().slice(0, 3)"
+				:key="note.id"
+				@click="openEditNote(note.id)"
+			>
+				<span>{{ note.title }}</span>
+			</div>
 		</section>
 	</div>
 </template>
@@ -78,12 +92,28 @@
 				color: hsl(160, 80%, 50%);
 			}
 		}
-
 		.favorite {
 			grid-column: 3;
 			grid-row: 1 / 3;
-			display: flex;
-			flex-direction: column;
+
+			p {
+				color: hsl(160, 80%, 50%);
+				margin-bottom: 1rem;
+			}
+
+			div {
+				border-radius: 10px;
+				border: 1px solid hsl(160, 0%, 85%);
+				padding: 0.5rem 2rem;
+				cursor: pointer;
+
+				span {
+				}
+			}
+
+			div + div {
+				margin-top: 0.8rem;
+			}
 		}
 	}
 
