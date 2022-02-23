@@ -17,6 +17,10 @@ body,
   flex: 1;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 @media (max-width: 1080px) {
   html {
     font-size: 93.75%;

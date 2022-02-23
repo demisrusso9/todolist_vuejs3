@@ -65,8 +65,8 @@
 			align-items: center;
 			justify-content: center;
 			border-radius: 10px;
-			border: 1px solid hsl(200, 0%, 85%);
-			box-shadow: 0px 20px 7px -16px hsl(200, 0%, 85%);
+			border: 1px solid $border-color;
+			box-shadow: 0px 20px 7px -16px $shadow-color;
 
 			transition: all 0.3s;
 
@@ -89,15 +89,17 @@
 		.total-notes,
 		.total-favorites {
 			p {
-				color: hsl(160, 80%, 50%);
+				color: $primary-color;
 			}
 		}
 		.favorite {
 			grid-column: 3;
 			grid-row: 1 / 3;
 
+			padding: 0.8rem 0;
+
 			p {
-				color: hsl(160, 80%, 50%);
+				color: $primary-color;
 				margin-bottom: 1rem;
 			}
 
@@ -106,8 +108,11 @@
 				border: 1px solid hsl(160, 0%, 85%);
 				padding: 0.5rem 2rem;
 				cursor: pointer;
+				transition: 0.3s;
 
-				span {
+				&:hover {
+					background-color: $primary-color;
+					color: white;
 				}
 			}
 
@@ -119,10 +124,25 @@
 
 	@media screen and (min-width: 1550px) {
 		.grid {
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: 1fr 1fr 2fr;
 			grid-template-rows: repeat(3, 1fr);
 
 			gap: 2rem;
+			margin: 4rem auto;
+			min-width: 800px;
+			text-align: center;
+		}
+	}
+
+	@media screen and (max-width: 1550px) {
+		.grid {
+			grid-template-columns: 1fr 1fr 2fr;
+			grid-template-rows: repeat(2, 1fr);
+
+			gap: 2rem;
+			margin: 4rem auto;
+			min-width: 800px;
+			text-align: center;
 		}
 	}
 
@@ -132,6 +152,7 @@
 			grid-template-rows: 1fr 1fr 1fr;
 
 			gap: 2rem;
+			margin: 1rem;
 
 			.create {
 				grid-column: 1 / 2;
@@ -150,8 +171,8 @@
 
 	@media screen and (max-width: 470px) {
 		.grid {
-			display: flex;
-			flex-direction: column;
+			grid-template-columns: 1fr 1fr;
+
 			margin: 1rem 0;
 
 			section {

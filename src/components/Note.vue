@@ -50,7 +50,7 @@
 
 <style lang="scss" scoped>
 	.favorite {
-		border-right: 5px solid hsl(60, 100%, 75%) !important;
+		border-right: 5px solid $favorite-color !important;
 		position: relative;
 
 		& > img {
@@ -74,9 +74,9 @@
 
 		border-radius: 4px;
 
-		border: 1px solid hsl(0, 0%, 80%);
-		border-right: 5px solid hsl(0, 0%, 80%);
-		box-shadow: 0 7px 5px -5px hsl(0, 0%, 80%);
+		border: 1px solid $border-color;
+		border-right: 5px solid $border-color;
+		box-shadow: 0 7px 5px -5px $shadow-color;
 
 		position: relative;
 
@@ -101,9 +101,9 @@
 			position: absolute;
 			bottom: -20px;
 
-			box-shadow: -1px -1px 5px hsl(0, 0%, 90%);
+			box-shadow: -1px -1px 5px $shadow-color;
 			border-radius: 30px;
-			background-color: hsl(0, 0%, 100%);
+			background-color: $white;
 
 			button {
 				font-size: 0;
@@ -121,17 +121,17 @@
 
 				&:nth-child(1):hover {
 					border-radius: 30px 0 0 30px;
-					background-color: hsl(0, 0%, 90%);
+					background-color: $semi-white;
 				}
 
 				&:nth-child(2):hover {
 					border-radius: 0;
-					background-color: hsl(0, 0%, 90%);
+					background-color: $semi-white;
 				}
 
 				&:nth-child(3):hover {
 					border-radius: 0 30px 30px 0;
-					background-color: hsl(0, 0%, 90%);
+					background-color: $semi-white;
 				}
 			}
 		}

@@ -4,12 +4,10 @@
 
 <template>
 	<header>
-		<h1>
-			<router-link v-if="user" to="/dashboard">Notes</router-link>
-		</h1>
+		<h1>Notes</h1>
 
 		<section v-if="user">
-			<router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+			<router-link to="/dashboard">Dashboard</router-link>
 			<router-link to="/notes">My Notes</router-link>
 			<router-link to="/manage">Create</router-link>
 			<hr />
@@ -27,8 +25,8 @@
 		justify-content: space-between;
 		align-items: center;
 
-		background-color: hsl(168, 0%, 97%);
-		border-bottom: 1px solid hsl(200, 100%, 50%);
+		background-color: $white;
+		border-bottom: 1px solid $primary-color;
 
 		padding: 1rem 2rem;
 
@@ -40,12 +38,7 @@
 			letter-spacing: 0.3rem;
 			transition: all 0.2s;
 			cursor: pointer;
-
-			a {
-				color: hsl(200, 100%, 50%);
-				cursor: pointer;
-				text-decoration: none;
-			}
+			color: $primary-color;
 
 			&:hover {
 				transform: scale(1.1);
@@ -58,13 +51,16 @@
 
 			a {
 				text-decoration: none;
-				/* padding: 0 0.5rem; */
+
 				font-size: 1rem;
-				transition: all 0.2s;
-				color: hsl(200, 100%, 45%);
+				transition: all 0.3s;
+				color: $primary-color;
 
 				&:hover {
-					color: hsl(200, 100%, 50%);
+					color: $light-primary-color;
+					background-color: $semi-white;
+					border-radius: 5px;
+					padding: 0.5rem;
 					transform: scale(1.15);
 				}
 			}
@@ -79,14 +75,14 @@
 				margin: 0 1rem;
 				border: none;
 				border-radius: 30px;
-				border-left: 2px solid hsl(0, 0%, 85%);
+				border-left: 2px solid $border-color;
 			}
 
 			.log-out {
-				color: hsl(0, 100%, 45%);
+				color: $red-color;
 
 				&:hover {
-					color: hsl(0, 100%, 45%);
+					color: $red-color;
 					transform: scale(1.15);
 				}
 			}

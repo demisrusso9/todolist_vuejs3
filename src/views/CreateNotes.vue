@@ -76,7 +76,7 @@
 		margin: 2rem;
 
 		fieldset {
-			border: 1px solid hsl(200, 0%, 75%);
+			border: 1px solid $border-color;
 			border-radius: 15px;
 			display: inherit;
 			flex-direction: column;
@@ -90,7 +90,7 @@
 				border-radius: 30px;
 				padding: 1rem;
 				text-align: center;
-				background-color: hsl(200, 100%, 50%);
+				background-color: $primary-color;
 			}
 
 			small {
