@@ -16,8 +16,6 @@ function signup(email: string, password: string) {
 function signWithGoogle() {
 	signInWithPopup(auth, provider).then((result) => {
 		user.value = result
-		console.log('signWithGoogle function')
-
 		router.push('/dashboard')
 	})
 }
@@ -30,12 +28,12 @@ const signUserOut = () => {
 }
 
 /// Is There an user logged in ?
-// watchEffect(() => {
-// 	auth.onAuthStateChanged((userState) => {
-// 		if (userState) {
-// 			user.value = userState
-// 			router.push('/dashboard')
-// 		}
-// 	})
-// })
+watchEffect(() => {
+	auth.onAuthStateChanged((userState) => {
+		if (userState) {
+			user.value = userState
+			router.push('/dashboard')
+		}
+	})
+})
 export { signup, signWithGoogle, signUserOut, user }

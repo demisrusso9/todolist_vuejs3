@@ -6,6 +6,7 @@ import DisplayNotes from '@/views/DisplayNotes.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import { watchEffect, onBeforeMount, onMounted } from 'vue'
 import { auth } from '@/utils/firebase-config'
+import { clearFields, note } from '@/store/notes'
 // import { getNotes } from '@/utils/firebase-document'
 
 const routes: Array<RouteRecordRaw> = [
@@ -56,6 +57,7 @@ const router = createRouter({
 // For each route
 router.beforeEach((to, from, next) => {
 	document.title = `${process.env.VUE_APP_TITLE} - ${String(to.name)}`
+	clearFields()
 
 	// Authenticated ? If not goes to main page
 	if (to.matched.some((record) => record.meta.requireAuth)) {
@@ -64,15 +66,6 @@ router.beforeEach((to, from, next) => {
 	} else {
 		next()
 	}
-})
-
-watchEffect(() => {
-	auth.onAuthStateChanged((userState) => {
-		if (userState) {
-			user.value = userState
-			router.push('/dashboard')
-		}
-	})
 })
 
 export default router

@@ -1,8 +1,6 @@
 import { ref, reactive } from 'vue'
-import { NotesProps } from '@/types/notes'
 
 // Properties
-
 const search = ref('')
 
 const note = reactive({
@@ -10,4 +8,9 @@ const note = reactive({
 	description: ''
 })
 
-export { note, search }
+const clearFields = () => {
+	note.title = ''
+	note.description = ''
+}
+
+export { note, search, clearFields }

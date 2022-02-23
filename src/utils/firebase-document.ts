@@ -48,6 +48,14 @@ async function createNoteTest() {
 }
 
 function openEditNote(id: string) {
+	const docRef = doc(db, 'notes', id)
+
+	// Add values to edit
+	onSnapshot(docRef, (doc) => {
+		note.title = doc.data()?.title
+		note.description = doc.data()?.description
+	})
+
 	router.push(`/manage/${id}`)
 }
 

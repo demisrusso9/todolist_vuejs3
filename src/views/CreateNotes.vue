@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	import { note, search } from '@/store/notes'
+	import { clearFields, note, search } from '@/store/notes'
 	import { toggleDarkMode } from '@/store/darkTheme'
 	import Button from '@/components/ui/Button.vue'
 	import ButtonIcon from '@/components/ui/ButtonIcon.vue'
@@ -27,12 +27,11 @@
 		// Has a parameter ? Edit Note
 		else updateNote(parameterId.value as string)
 
-		// Clear fields
-		note.title = ''
-		note.description = ''
+		clearFields()
 	}
 
 	function cancelEdit() {
+		clearFields()
 		router.push('/notes')
 	}
 </script>
