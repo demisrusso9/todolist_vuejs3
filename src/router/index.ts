@@ -3,7 +3,7 @@ import SignUp from '@/views/SignUp.vue'
 import CreateNotes from '@/views/CreateNotes.vue'
 import DisplayNotes from '@/views/DisplayNotes.vue'
 import Dashboard from '@/views/Dashboard.vue'
-import { clearFields } from '@/store/notes'
+import { clearFields, showMenu } from '@/store/notes'
 import { user } from '@/utils/firebase-authentication'
 
 const routes: Array<RouteRecordRaw> = [
@@ -54,6 +54,9 @@ const router = createRouter({
 // For each route
 router.beforeEach((to, from, next) => {
 	document.title = `${process.env.VUE_APP_TITLE} - ${String(to.name)}`
+
+	// Stop showing menu
+	showMenu.value = false
 	clearFields()
 
 	// Authenticated ? If not goes to main page

@@ -35,7 +35,7 @@
 			<p v-show="seeFavoriteNotes().length">Favorite Notes</p>
 
 			<small v-show="seeFavoriteNotes().length === 0"
-				>Nothing to show here</small
+				>No favorite notes to show here!</small
 			>
 			<div
 				v-for="note in seeFavoriteNotes().slice(0, 3)"
@@ -51,7 +51,7 @@
 <style lang="scss" scoped>
 	.grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr 2fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
 		width: auto;
 		height: 100%;
@@ -65,10 +65,15 @@
 			align-items: center;
 			justify-content: center;
 			border-radius: 10px;
+			padding: 1rem;
 			border: 1px solid $border-color;
 			box-shadow: 0px 20px 7px -16px $shadow-color;
 
 			transition: all 0.3s;
+
+			a p {
+				color: $primary-color;
+			}
 
 			a {
 				text-align: center;
@@ -136,12 +141,11 @@
 
 	@media screen and (max-width: 1550px) {
 		.grid {
-			grid-template-columns: 1fr 1fr 2fr;
+			grid-template-columns: 1fr 1fr 3fr;
 			grid-template-rows: repeat(2, 1fr);
 
 			gap: 2rem;
 			margin: 4rem auto;
-			min-width: 800px;
 			text-align: center;
 		}
 	}
@@ -172,7 +176,7 @@
 	@media screen and (max-width: 470px) {
 		.grid {
 			grid-template-columns: 1fr 1fr;
-
+			gap: 1rem;
 			margin: 1rem 0;
 
 			section {

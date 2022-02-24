@@ -19,30 +19,30 @@
 		color: black;
 		border: none;
 		border-radius: 10px;
-		background-color: hsl(200, 100%, 50%);
-		color: hsl(200, 0%, 100%);
+		background-color: $primary-color;
+		color: $white;
 
 		transition: 0.3s;
-		box-shadow: 0px 12px 8px -10px hsl(200, 0%, 60%);
+		box-shadow: 0px 12px 8px -10px $border-color;
 		cursor: pointer;
 
 		&:hover {
-			background-color: hsl(200, 100%, 60%);
+			background-color: $light-primary-color;
 		}
 	}
 
 	.edit {
-		background-color: lightblue;
+		background-color: $primary-color;
 
 		&:hover {
-			background-color: lightblue;
+			background-color: $light-primary-color;
 		}
 	}
 	.cancel {
-		background-color: red;
+		background-color: $red-color;
 
 		&:hover {
-			background-color: hsl(0, 100%, 80%);
+			background-color: $light-red-color;
 		}
 	}
 </style>

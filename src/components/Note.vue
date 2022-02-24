@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	import { defineProps, ref } from 'vue'
+	import { defineProps, ref, watch } from 'vue'
 	import Button from '@/components/ui/Button.vue'
 	import FavoriteIcon from '@/assets/icons/favorite.svg'
 	import EditIcon from '@/assets/icons/edit.svg'
@@ -10,6 +10,7 @@
 		openEditNote,
 		deleteNote
 	} from '@/utils/firebase-document'
+	import { search } from '@/store/notes'
 
 	defineProps<{
 		note: NotesProps
@@ -20,6 +21,15 @@
 	const getDescription = () => {
 		showDescription.value = !showDescription.value
 	}
+
+	watch(
+		() => search.value.length > 0,
+		() => {
+			console.log('opa')
+
+			showDescription.value = true
+		}
+	)
 </script>
 
 <template>

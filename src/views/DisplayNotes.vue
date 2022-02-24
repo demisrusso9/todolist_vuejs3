@@ -1,11 +1,33 @@
 <script lang="ts" setup>
 	import Note from '@/components/Note.vue'
-	import { state } from '@/store/notes'
+	import { state, search } from '@/store/notes'
+	import Input from '@/components/ui/Input.vue'
+	import RemoveSearch from '@/assets/icons/search.svg'
+
+	function searchNotes(value: string) {
+		if (!value) return state.notes
+
+		const text = value.toLowerCase()
+
+		// Search by both title and description
+		return state.notes.filter((note) => {
+			return (
+				note.title.toLowerCase().includes(text) ||
+				note.description.toLowerCase().includes(text)
+			)
+		})
+	}
 </script>
 
 <template>
 	<section>
-		<Note v-for="note in state.notes" :key="note.id" :note="note" />
+		<div class="search">
+			<img :src="RemoveSearch" alt="Search" />
+
+			<input v-model="search" placeholder="Search..." />
+		</div>
+
+		<Note v-for="note in searchNotes(search)" :key="note.id" :note="note" />
 	</section>
 </template>
 
@@ -16,6 +38,32 @@
 		justify-content: center;
 		align-items: center;
 		padding: 2rem 0;
+
+		.search {
+			display: flex;
+			align-items: center;
+			position: relative;
+
+			img {
+				position: absolute;
+				right: 10px;
+				width: 30px;
+				height: 30px;
+			}
+
+			input {
+				width: auto;
+				padding: 0.6rem 3rem 0.6rem 2rem;
+				border-radius: 30px;
+				border: 1px solid $border-color;
+				outline: none;
+				transition: 0.3s;
+
+				&:focus {
+					border: 2px solid $primary-color;
+				}
+			}
+		}
 	}
 
 	@media screen and (max-width: 600px) {

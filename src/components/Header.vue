@@ -1,110 +1,152 @@
 <script lang="ts" setup>
 	import { signUserOut, user } from '@/utils/firebase-authentication'
+	import MenuIcon from '@/assets/icons/menu.svg'
+	import { showMenu } from '@/store/notes'
+
+	const toggleMenu = () => (showMenu.value = !showMenu.value)
 </script>
 
 <template>
 	<header>
-		<h1>Notes</h1>
+		<nav>
+			<router-link to="/dashboard">Notes</router-link>
 
-		<section v-if="user">
-			<router-link to="/dashboard">Dashboard</router-link>
-			<router-link to="/notes">My Notes</router-link>
-			<router-link to="/manage">Create</router-link>
-			<hr />
-			<router-link class="log-out" to="/" @click="signUserOut"
-				>Log out</router-link
-			>
-		</section>
+			<ul v-if="user" :class="showMenu && 'active'">
+				<li>
+					<router-link to="/dashboard">Dashboard</router-link>
+				</li>
+
+				<li>
+					<router-link to="/notes">My Notes</router-link>
+				</li>
+
+				<li>
+					<router-link to="/manage">Create</router-link>
+				</li>
+
+				<li>
+					<router-link class="log-out" to="/" @click="signUserOut"
+						>Log out</router-link
+					>
+				</li>
+			</ul>
+
+			<div v-if="user" class="hamburger">
+				<input type="checkbox" id="check" />
+				<label for="check">
+					<img :src="MenuIcon" alt="Menu Icon" @click="toggleMenu" />
+				</label>
+			</div>
+		</nav>
 	</header>
 </template>
 
 <style lang="scss" scoped>
 	header {
-		user-select: none;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		background-color: black;
 
-		background-color: $white;
-		border-bottom: 1px solid $primary-color;
-
-		padding: 1rem 2rem;
-
-		max-height: 70px;
-
-		h1 {
-			font-size: 2rem;
-			font-weight: 400;
-			letter-spacing: 0.3rem;
-			transition: all 0.2s;
-			cursor: pointer;
-			color: $primary-color;
-
-			&:hover {
-				transform: scale(1.1);
-			}
-		}
-
-		section {
+		nav {
 			display: flex;
 			align-items: center;
+			justify-content: space-between;
+			background-color: $white;
+			border-bottom: 1px solid $primary-color;
+			padding: 0 1.2rem;
+			min-height: 70px;
 
-			a {
+			> a {
+				cursor: pointer;
 				text-decoration: none;
-
-				font-size: 1rem;
-				transition: all 0.3s;
+				font-size: 2rem;
+				font-weight: 400;
+				letter-spacing: 0.3rem;
+				transition: all 0.2s;
 				color: $primary-color;
 
 				&:hover {
-					color: $light-primary-color;
-					background-color: $semi-white;
-					border-radius: 5px;
-					padding: 0.5rem;
-					transform: scale(1.15);
+					transform: scale(1.1);
 				}
 			}
 
-			a + a {
-				margin-left: 2rem;
-			}
-
-			hr {
+			ul {
 				display: flex;
-				height: 25px;
-				margin: 0 1rem;
-				border: none;
-				border-radius: 30px;
-				border-left: 2px solid $border-color;
-			}
+				justify-content: space-between;
+				align-items: center;
+				list-style: none;
 
-			.log-out {
-				color: $red-color;
+				li a {
+					padding: 0.5rem 0.8rem;
+					text-decoration: none;
+					color: $primary-color;
+					text-transform: uppercase;
+					font-size: 0.8rem;
+					letter-spacing: 2px;
+					transition: 0.3s;
 
-				&:hover {
-					color: $red-color;
-					transform: scale(1.15);
+					&:hover {
+						color: $light-primary-color;
+						background-color: $semi-white;
+						border-radius: 5px;
+					}
 				}
+
+				.log-out {
+					color: $red-color;
+				}
+			}
+		}
+
+		.hamburger {
+			display: none;
+
+			width: 40px;
+			height: 40px;
+
+			input {
+				display: none;
 			}
 		}
 	}
 
-	@media screen and (max-width: 500px) {
+	@media screen and (max-width: 530px) {
 		header {
-			display: grid;
-			grid-template-columns: 1fr;
-			grid-template-rows: 1fr;
-			justify-items: center;
-			align-items: center;
-			max-height: 100px;
+			ul {
+				position: fixed;
+				top: 70px;
+				right: 100%;
+				flex-direction: column;
 
-			h1 {
-				margin-bottom: 0.5rem;
+				width: 100%;
+				padding: 2rem 0rem;
+				gap: 30px;
+
+				text-align: center;
+				border: 1px solid $primary-color;
+				border-top: none;
+				background-color: $white;
+
+				transition: 0.3s;
+				z-index: 3;
 			}
 
-			section {
-				margin: 0 auto;
-				text-align: center;
+			ul.active {
+				right: 0;
+
+				li a {
+					font-size: 1rem;
+					text-transform: none;
+					font-weight: bold;
+				}
+			}
+
+			.hamburger {
+				display: block;
+				z-index: 10;
+
+				img {
+					z-index: -1;
+					cursor: pointer;
+				}
 			}
 		}
 	}
