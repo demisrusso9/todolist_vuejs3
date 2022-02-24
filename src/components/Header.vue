@@ -92,6 +92,10 @@
 
 				.log-out {
 					color: $red-color;
+
+					&:hover {
+						color: $red-color;
+					}
 				}
 			}
 		}

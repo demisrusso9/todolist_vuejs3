@@ -25,8 +25,6 @@
 	watch(
 		() => search.value.length > 0,
 		() => {
-			console.log('opa')
-
 			showDescription.value = true
 		}
 	)
@@ -39,7 +37,9 @@
 		<section class="details">
 			<h1 @click="getDescription">{{ note.title }}</h1>
 
-			<p v-show="showDescription">{{ note.description }}</p>
+			<p @click="getDescription" v-show="showDescription">
+				{{ note.description }}
+			</p>
 		</section>
 
 		<section class="options">
@@ -97,12 +97,14 @@
 			text-align: center;
 			user-select: none;
 
+			cursor: pointer;
 			h1 {
-				cursor: pointer;
 				margin-bottom: 1.5rem;
 			}
 
 			p {
+				overflow-wrap: break-word;
+				max-width: 450px;
 				animation: append-animate 0.3s linear;
 				margin-bottom: 2.5rem;
 			}

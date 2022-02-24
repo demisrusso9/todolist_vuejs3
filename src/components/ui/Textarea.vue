@@ -9,7 +9,6 @@
 <template>
 	<textarea
 		placeholder="Description"
-		maxlength="400"
 		:value="description"
 		@input="e => $emit('update:description', (e.target as HTMLTextAreaElement).value)"
 	/>

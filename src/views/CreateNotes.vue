@@ -5,15 +5,18 @@
 	import Button from '@/components/ui/Button.vue'
 	import Input from '@/components/ui/Input.vue'
 	import Textarea from '@/components/ui/Textarea.vue'
+	import Error from '@/components/ui/Error.vue'
 	import { createNote, updateNote } from '@/utils/firebase-document'
-	import { clearFields, note } from '@/store/notes'
-
-	const maxlength = computed(() => 400 - note.description.length)
+	import useValidate from '@vuelidate/core'
+	import { required, helpers } from '@vuelidate/validators'
+	import { note } from '@/store/notes'
 
 	const route = useRoute()
 	const parameterId = computed(() => route.params.id || null)
 
 	function handleForm() {
+		v$.value.$validate()
+
 		// Fields empty ? return
 		if (!note.title || !note.description) return
 
@@ -32,6 +35,19 @@
 	function cancelEdit() {
 		router.push('/notes')
 	}
+
+	const rules = computed(() => {
+		return {
+			title: {
+				required: helpers.withMessage('Fill your note title', required)
+			},
+			description: {
+				required: helpers.withMessage('Fill your note description', required)
+			}
+		}
+	})
+
+	const v$ = useValidate(rules, note)
 </script>
 
 <template>
@@ -41,8 +57,12 @@
 				{{ !parameterId ? 'Describe your note' : 'Edit your note' }}
 			</legend>
 
+			<Error v-if="v$.title.$error">{{ v$.title.$errors[0].$message }}</Error>
 			<Input v-model:title="note.title" placeholder="Type your todo here" />
-			<small>{{ maxlength }}</small>
+
+			<Error v-if="v$.description.$error">{{
+				v$.description.$errors[0].$message
+			}}</Error>
 			<Textarea v-model:description="note.description" />
 
 			<div>
