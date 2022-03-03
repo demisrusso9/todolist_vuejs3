@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 	import { state } from '@/store/notes'
 	import { openEditNote } from '@/utils/firebase-document'
+	import { darkTheme, toggleDarkMode } from '@/store/darkTheme'
 
 	function seeFavoriteNotes() {
 		return state.notes.filter((note) => note.favorite)
@@ -8,7 +9,7 @@
 </script>
 
 <template>
-	<div class="grid">
+	<div class="grid" :class="darkTheme && 'darkTheme'">
 		<section class="create">
 			<router-link to="/manage">
 				<p>Create</p>
@@ -57,7 +58,6 @@
 		height: 100%;
 		padding: 1.5rem;
 		gap: 4rem;
-		margin: 5rem 4rem;
 
 		section {
 			display: flex;
@@ -67,7 +67,7 @@
 			border-radius: 10px;
 			padding: 1rem;
 			border: 1px solid $border-color;
-			box-shadow: 0px 20px 7px -16px $shadow-color;
+			box-shadow: 0px 13px 7px -16px $shadow-color;
 
 			transition: all 0.3s;
 
@@ -127,13 +127,18 @@
 		}
 	}
 
+	.darkTheme {
+		color: $darktheme-color;
+		background-color: $darktheme-background;
+	}
+
 	@media screen and (min-width: 1550px) {
 		.grid {
 			grid-template-columns: 1fr 1fr 2fr;
 			grid-template-rows: repeat(3, 1fr);
 
 			gap: 2rem;
-			margin: 4rem auto;
+			padding: 4rem;
 			min-width: 800px;
 			text-align: center;
 		}
@@ -145,7 +150,7 @@
 			grid-template-rows: repeat(2, 1fr);
 
 			gap: 2rem;
-			margin: 4rem auto;
+			padding: 4rem;
 			text-align: center;
 		}
 	}
@@ -156,7 +161,7 @@
 			grid-template-rows: 1fr 1fr 1fr;
 
 			gap: 2rem;
-			margin: 1rem;
+			padding: 2rem;
 
 			.create {
 				grid-column: 1 / 2;
@@ -176,8 +181,8 @@
 	@media screen and (max-width: 470px) {
 		.grid {
 			grid-template-columns: 1fr 1fr;
-			gap: 1rem;
-			margin: 1rem 0;
+			gap: 1.3rem;
+			padding: 2rem;
 
 			section {
 				flex: 1;

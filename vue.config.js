@@ -4,6 +4,7 @@ module.exports = {
       sass: {
         additionalData: `
           @import "@/assets/variables.scss";
+          @import "@/assets/darktheme.scss";
         `
       }
     }

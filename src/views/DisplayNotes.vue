@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 	import Note from '@/components/Note.vue'
 	import { state, search } from '@/store/notes'
+	import { darkTheme } from '@/store/darkTheme'
 	import Input from '@/components/ui/Input.vue'
 	import RemoveSearch from '@/assets/icons/search.svg'
 
@@ -20,11 +21,11 @@
 </script>
 
 <template>
-	<section>
+	<section :class="darkTheme && 'darkTheme'">
 		<div class="search">
 			<img :src="RemoveSearch" alt="Search" />
 
-			<input v-model="search" placeholder="Search..." />
+			<Input v-model="search" placeholder="Search..." />
 		</div>
 
 		<Note v-for="note in searchNotes(search)" :key="note.id" :note="note" />
@@ -35,6 +36,7 @@
 	section {
 		display: flex;
 		flex-direction: column;
+		flex: 1;
 		justify-content: center;
 		align-items: center;
 		padding: 2rem 0;
@@ -64,6 +66,11 @@
 				}
 			}
 		}
+	}
+
+	.darkTheme {
+		color: $darktheme-color;
+		background-color: $darktheme-background;
 	}
 
 	@media screen and (max-width: 600px) {

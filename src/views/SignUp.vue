@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 	import { ref } from 'vue'
 	import { signWithGoogle, signup } from '@/utils/firebase-authentication'
+	import { darkTheme } from '@/store/darkTheme'
 
 	const username = ref('')
 	const password = ref('')
@@ -19,7 +20,7 @@
 </script>
 
 <template>
-	<div class="container">
+	<div class="container" :class="darkTheme && 'darkTheme'">
 		<h1>Sign Up to create your notes!</h1>
 
 		<form @submit.prevent="handleForm">
@@ -59,6 +60,10 @@
 </template>
 
 <style lang="scss" scoped>
+	.darkTheme {
+		color: $darktheme-color;
+		background-color: $darktheme-background;
+	}
 	.container {
 		display: flex;
 		flex-direction: column;

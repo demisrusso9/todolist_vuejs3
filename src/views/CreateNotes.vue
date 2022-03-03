@@ -10,6 +10,7 @@
 	import useValidate from '@vuelidate/core'
 	import { required, helpers } from '@vuelidate/validators'
 	import { note } from '@/store/notes'
+	import { darkTheme } from '@/store/darkTheme'
 
 	const route = useRoute()
 	const parameterId = computed(() => route.params.id || null)
@@ -51,14 +52,14 @@
 </script>
 
 <template>
-	<form @submit.prevent="handleForm">
+	<form @submit.prevent="handleForm" :class="darkTheme && 'darkTheme'">
 		<fieldset>
 			<legend>
 				{{ !parameterId ? 'Describe your note' : 'Edit your note' }}
 			</legend>
 
 			<Error v-if="v$.title.$error">{{ v$.title.$errors[0].$message }}</Error>
-			<Input v-model:title="note.title" placeholder="Type your todo here" />
+			<Input v-model="note.title" placeholder="Type your todo here" />
 
 			<Error v-if="v$.description.$error">{{
 				v$.description.$errors[0].$message
@@ -87,13 +88,12 @@
 
 <style lang="scss" scoped>
 	form {
-		height: 100%;
 		display: flex;
-		flex-grow: 1;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		margin: 2rem;
+		flex-grow: 1;
+		padding: 1.6rem;
 
 		fieldset {
 			border: 1px solid $border-color;
@@ -125,6 +125,11 @@
 				}
 			}
 		}
+	}
+
+	.darkTheme {
+		color: $darktheme-color;
+		background-color: $darktheme-background;
 	}
 
 	@media screen and (max-width: 350px) {

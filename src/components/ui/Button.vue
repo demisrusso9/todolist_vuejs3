@@ -23,7 +23,7 @@
 		color: $white;
 
 		transition: 0.3s;
-		box-shadow: 0px 12px 8px -10px $border-color;
+		box-shadow: 0px 7px 8px -10px $shadow-color;
 		cursor: pointer;
 
 		&:hover {

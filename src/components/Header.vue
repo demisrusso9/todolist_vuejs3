@@ -2,16 +2,25 @@
 	import { signUserOut, user } from '@/utils/firebase-authentication'
 	import MenuIcon from '@/assets/icons/menu.svg'
 	import { showMenu } from '@/store/notes'
+	import { darkTheme, toggleDarkMode } from '@/store/darkTheme'
 
 	const toggleMenu = () => (showMenu.value = !showMenu.value)
 </script>
 
 <template>
 	<header>
-		<nav>
-			<router-link to="/dashboard">Notes</router-link>
+		<nav :class="darkTheme && 'darkTheme'">
+			<router-link to="/dashboard">
+				<h1>Notes</h1>
+			</router-link>
 
 			<ul v-if="user" :class="showMenu && 'active'">
+				<li>
+					<a @click="toggleDarkMode">{{
+						!darkTheme ? 'Dark Mode' : 'Light Mode'
+					}}</a>
+				</li>
+
 				<li>
 					<router-link to="/dashboard">Dashboard</router-link>
 				</li>
@@ -42,74 +51,83 @@
 </template>
 
 <style lang="scss" scoped>
-	header {
-		background-color: black;
+	$dark: v-bind(darkTheme);
 
-		nav {
+	header nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: $white;
+		border-bottom: 1px solid $primary-color;
+		padding: 0 1.2rem;
+		min-height: 70px;
+
+		a,
+		h1 {
+			cursor: pointer;
+			text-decoration: none;
+			font-size: 2rem;
+			font-weight: 400;
+			letter-spacing: 0.3rem;
+			transition: all 0.2s;
+			color: $primary-color;
+
+			&:hover {
+				transform: scale(1.05);
+			}
+		}
+
+		ul {
 			display: flex;
-			align-items: center;
 			justify-content: space-between;
-			background-color: $white;
-			border-bottom: 1px solid $primary-color;
-			padding: 0 1.2rem;
-			min-height: 70px;
+			align-items: center;
+			list-style: none;
+			user-select: none;
 
-			> a {
-				cursor: pointer;
+			li a {
+				padding: 0.5rem 1.2rem;
 				text-decoration: none;
-				font-size: 2rem;
-				font-weight: 400;
-				letter-spacing: 0.3rem;
-				transition: all 0.2s;
 				color: $primary-color;
+				text-transform: uppercase;
+				font-size: 0.8rem;
+				letter-spacing: 2px;
+				transition: 0.3s;
 
 				&:hover {
-					transform: scale(1.1);
-				}
-			}
-
-			ul {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				list-style: none;
-
-				li a {
-					padding: 0.5rem 0.8rem;
-					text-decoration: none;
-					color: $primary-color;
-					text-transform: uppercase;
-					font-size: 0.8rem;
-					letter-spacing: 2px;
-					transition: 0.3s;
-
-					&:hover {
+					@if $dark {
 						color: $light-primary-color;
-						background-color: $semi-white;
-						border-radius: 5px;
+						background-color: red;
 					}
 				}
 
-				.log-out {
+				&:hover {
+					color: $light-primary-color;
+					background-color: $semi-white;
+					border-radius: 5px;
+				}
+			}
+
+			.log-out {
+				color: $red-color;
+
+				&:hover {
 					color: $red-color;
-
-					&:hover {
-						color: $red-color;
-					}
 				}
 			}
 		}
+	}
+	.hamburger {
+		display: none;
 
-		.hamburger {
+		width: 40px;
+		height: 40px;
+
+		input {
 			display: none;
-
-			width: 40px;
-			height: 40px;
-
-			input {
-				display: none;
-			}
 		}
+	}
+	.darkTheme {
+		background-color: $darktheme-background;
 	}
 
 	@media screen and (max-width: 530px) {
@@ -155,3 +173,11 @@
 		}
 	}
 </style>
+
+<!-- Global SCSS -->
+<!-- <style lang="scss">
+	body {
+		color: $darktheme-color;
+		background-color: $darktheme-background;
+	}
+</style> -->

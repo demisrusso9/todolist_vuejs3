@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-const darkTheme = ref(false)
+const darkTheme = ref(true)
 
 function toggleDarkMode() {
 	return (darkTheme.value = !darkTheme.value)

@@ -1,16 +1,12 @@
 <script lang="ts" setup>
-	import { defineProps } from 'vue'
-
-	defineProps({
-		title: String
-	})
+	import { darkTheme } from '@/store/darkTheme'
 </script>
 
 <template>
 	<input
 		type="text"
-		:value="title"
-		@input="$emit('update:title', ($event.target as HTMLInputElement).value)"
+		:class="darkTheme && 'darkTheme'"
+		@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
 	/>
 </template>
 
@@ -21,10 +17,15 @@
 		margin: 1rem 0rem;
 		border: none;
 		transition: all 0.3s;
-		border-bottom: 2px solid hsl(200, 10%, 50%);
+		border-bottom: 2px solid $border-color;
 
 		&:focus {
-			border-bottom: 2px solid hsl(200, 100%, 50%);
+			border-bottom: 3px solid $light-primary-color;
 		}
+	}
+
+	.darkTheme {
+		color: $darktheme-color;
+		background-color: $darktheme-background;
 	}
 </style>

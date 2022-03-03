@@ -11,6 +11,7 @@
 		deleteNote
 	} from '@/utils/firebase-document'
 	import { search } from '@/store/notes'
+	import { darkTheme } from '@/store/darkTheme'
 
 	defineProps<{
 		note: NotesProps
@@ -42,7 +43,7 @@
 			</p>
 		</section>
 
-		<section class="options">
+		<section class="options" :class="darkTheme && 'darkTheme'">
 			<button @click="markAsFavorite(note.id)">
 				<img :src="FavoriteIcon" />
 			</button>
@@ -71,6 +72,10 @@
 			right: 10px;
 		}
 	}
+	.darkTheme {
+		color: $darktheme-color;
+		background-color: $darktheme-background;
+	}
 	.note {
 		display: flex;
 		flex-direction: column;
@@ -86,7 +91,7 @@
 
 		border: 1px solid $border-color;
 		border-right: 5px solid $border-color;
-		box-shadow: 0 7px 5px -5px $shadow-color;
+		box-shadow: 0 8px 5px -10px $shadow-color;
 
 		position: relative;
 
@@ -96,8 +101,8 @@
 			justify-content: center;
 			text-align: center;
 			user-select: none;
-
 			cursor: pointer;
+
 			h1 {
 				margin-bottom: 1.5rem;
 			}
@@ -109,18 +114,18 @@
 				margin-bottom: 2.5rem;
 			}
 		}
+
 		.options {
 			position: absolute;
-			bottom: -20px;
+			bottom: 0px;
+			right: 0px;
 
-			box-shadow: -1px -1px 5px $shadow-color;
-			border-radius: 30px;
-			background-color: $white;
+			/* box-shadow: 0 0px 5px -3px $shadow-color; */
 
 			button {
 				font-size: 0;
 				border: none;
-				border-radius: 30px;
+
 				background-color: transparent;
 				padding: 0.7rem;
 				cursor: pointer;
@@ -132,17 +137,14 @@
 				}
 
 				&:nth-child(1):hover {
-					border-radius: 30px 0 0 30px;
 					background-color: $semi-white;
 				}
 
 				&:nth-child(2):hover {
-					border-radius: 0;
 					background-color: $semi-white;
 				}
 
 				&:nth-child(3):hover {
-					border-radius: 0 30px 30px 0;
 					background-color: $semi-white;
 				}
 			}
